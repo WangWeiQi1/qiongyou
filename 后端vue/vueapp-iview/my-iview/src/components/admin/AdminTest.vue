@@ -12,6 +12,19 @@
                 <br>
                 <br>
                 <Button type="success" long @click='delete_partner_list'>删除结伴列表</Button>
+                <br>
+                <br>
+                <Button type="success" long @click='get_region_list'>获取区域列表</Button>
+                <br>
+                <br>
+                <Button type="success" long @click='get_region_detail'>获取区域详情</Button>
+                <br>
+                <br>
+                <Button type="success" long @click='get_cpartner_list'>获取结伴列表</Button>
+                <br>
+                <br>
+                <Button type="success" long @click='get_cpartner_detail'>获取结伴详情</Button>
+
             </div>
         </NewMenu>
     </div>
@@ -61,7 +74,7 @@ export default {
     },
     methods: {
         ...mapMutations(['get_index', 'get_current_user', 'get_logout']),
-        add_method(request_link, data) {
+        post_method(request_link, data) {
             axios.post(request_link, 
 
                 qs.stringify(data),
@@ -77,7 +90,7 @@ export default {
                 log('发布请求失败')
             })
         },
-        delete_method(request_link, data) {
+        get_method(request_link, data) {
             axios.get(request_link, 
                 data,
                 
@@ -100,7 +113,7 @@ export default {
                 params: data,
             }
             const request_link = `${domain}/cpartner/reply_add`
-            this.add_method(request_link, data_main)
+            this.post_method(request_link, data_main)
         },
         delete_partner_reply() {
             const data = {
@@ -111,7 +124,7 @@ export default {
                 params: data,
             }
             const request_link = `${domain}/cpartner/reply_delete`
-            this.delete_method(request_link, data_main)
+            this.get_method(request_link, data_main)
         },
         add_partner_list() {
             const data = {
@@ -125,7 +138,7 @@ export default {
                 params: data,
             }
             const request_link = `${domain}/cpartner/list_add`
-            this.add_method(request_link, data_main)
+            this.post_method(request_link, data_main)
         },
         delete_partner_list() {
             const data = {
@@ -137,8 +150,59 @@ export default {
             }
 
             const request_link = `${domain}/cpartner/list_delete`
-            this.delete_method(request_link, data_main)
-        }
+            this.get_method(request_link, data_main)
+        },
+        get_region_list() {
+            // log('获取区域列表按钮被点击')
+            const data = {
+                region_type: 'A',
+            }
+
+            const data_main = {
+                params: data,
+            }
+
+            const request_link = `${domain}/region/condition_all`
+            this.get_method(request_link, data_main)
+        },
+        get_region_detail() {
+            // log('获取区域详情按钮被点击')
+            const data = {
+                region_id: 1,
+            }
+
+            const data_main = {
+                params: data,
+            }
+
+            const request_link = `${domain}/region/detail`
+            this.get_method(request_link, data_main)
+        },
+        get_cpartner_list() {
+            // log('获取结伴列表按钮被点击')
+            const data = {
+                cpartner_type: 'A',
+            }
+
+            const data_main = {
+                params: data,
+            }
+
+            const request_link = `${domain}/cpartner/condition_all`
+            this.get_method(request_link, data_main)
+        },
+        get_cpartner_detail() {
+            const data = {
+                cpartner_id: 1,
+            }
+
+            const data_main = {
+                params: data,
+            }
+
+            const request_link = `${domain}/cpartner/detail`
+            this.get_method(request_link, data_main)
+        },
 
         
     },

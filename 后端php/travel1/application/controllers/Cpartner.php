@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         }
 
+
         public function reply_add() {
             $data = $this -> input -> post('params');
             $this -> load -> model('Main_model');
@@ -23,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 echo 0;
             }
         }
+
 
         public function reply_delete() {
             $cpartner_id = $this -> input -> get('cpartner_id');
@@ -39,7 +41,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
 
-
         public function list_add() {
             $data = $this -> input -> post('params');
             $this -> load -> model('Main_model');
@@ -53,9 +54,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
         public function list_delete() {
-            $cpartner_id = $this -> input -> get('cpartnerlist_id');
+            $cpartnerlist_id = $this -> input -> get('cpartnerlist_id');
             $condition = array(
-                'cpartner_id' => $cpartner_id,
+                'cpartnerlist_id' => $cpartnerlist_id,
             );
             $this -> load -> model('Main_model');
             $query = $this -> Main_model -> delete_ins('cpartnerlist', $condition);
@@ -64,6 +65,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             } else {
                 echo 0;
             }
+        }
+
+
+        public function condition_all() {
+            $cpartner_type = $this -> input -> get('cpartner_type');
+            $this -> load -> model('Main_model');
+            $dicta = array(
+                'cpartner_type' => $cpartner_type,
+            );
+            $finda = $this -> Main_model -> concat_all(
+                'cpartner',
+                'user',
+                'cpartner.cpartner_user_id = user.user_id',
+                $dicta
+            );
+            echo json_encode($finda);
+        }
+
+
+        public function detail() {
+            $cpartner_id = $this -> input -> get('cpartner_id');
+            $this -> load -> model('Main_model');
+            $dicta = array(
+                'cpartner_id' => $cpartner_id,
+            );
+            $cpartner_detail = $this -> Main_model -> concat_all(
+                'cpartner',
+                'user',
+                'cpartner.cpartner_user_id = user.user_id',
+                $dicta
+            );
+            $cpartner_list = $this -> Main_model -> concat_all(
+                'cpartner_reply',
+                'user',
+                'cpartner_reply.cpartner_reply_user_id = user.user_id',
+                $dicta
+            );
+            $datas = array(
+                'cpartner_detail' => $cpartner_detail,
+                'cpartner_list' => $cpartner_list,
+            );
+            echo json_encode($datas);
         }
 
 

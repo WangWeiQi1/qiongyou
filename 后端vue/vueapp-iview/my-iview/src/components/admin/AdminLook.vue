@@ -136,7 +136,7 @@ export default {
         },
         get_region() {
             axios.get(this.region_link).then(res => {
-                // log('请求所有的 region 成功, 这是给出的响应:', res.data)
+                log('请求所有的 region 成功, 这是给出的响应:', res.data)
                 // {
                 //     city: 'John Brown',
                 //     region_type: 18,

@@ -362,8 +362,8 @@ export default {
                     region_id: this.region_id
                 }
             }).then(res => {
-                log('获取 region detail 成功, 这是给出的响应:', res.data)
-                const data = res.data[0]
+                // log('获取 region detail 成功, 这是给出的响应:', res.data)
+                const data = res.data.region_detail[0]
                 this.title = data.region_name
                 this.city = data.city_id
                 this.type = data.region_type

@@ -57,8 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
 
-
-
         public function all() {
             $this -> load -> model('Main_model');
             $dicta = array();
@@ -71,16 +69,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo json_encode($finda);
         }
 
+
+        public function condition_all() {
+            $region_type = $this -> input -> get('region_type');
+            $this -> load -> model('Main_model');
+            $dicta = array(
+                'region_type' => $region_type,
+            );
+            $finda = $this -> Main_model -> concat_all(
+                'region',
+                'city',
+                'region.city_id = city.city_id',
+                $dicta
+            );
+            echo json_encode($finda);
+        }
+
+
+
         public function detail() {
             $region_id = $this -> input -> get('region_id');
             $this -> load -> model('Main_model');
-            $data = array(
+            $dicta = array(
                 'region_id' => $region_id,
             );
-            $finda = $this -> Main_model -> find_by('region', $data);
-            echo json_encode($finda);
+            $region_detail = $this -> Main_model -> find_by('region', $dicta);
+            $reply_list = $this -> Main_model -> concat_all(
+                'region_reply',
+                'user',
+                'region_reply.region_reply_user_id = user.user_id',
+                $dicta
+            );
+            $datas = array(
+                'region_detail' => $region_detail,
+                'reply_list' => $reply_list,
+            );
+            echo json_encode($datas);
 
         }
+
+
 
 
 
