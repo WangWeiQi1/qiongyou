@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : bbs
+Source Server         : php
 Source Server Version : 50624
 Source Host           : localhost:3306
 Source Database       : qiongyou
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-07-13 11:57:23
+Date: 2018-07-19 12:51:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,11 +61,13 @@ CREATE TABLE `cpartner` (
   `cpartner_user_id` int(11) DEFAULT NULL COMMENT '结伴发起人的id',
   `cpartner_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '结伴发起时间',
   PRIMARY KEY (`cpartner_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cpartner
 -- ----------------------------
+INSERT INTO `cpartner` VALUES ('1', 'A', '测试A', 'aaa', '3', '2018-07-17 11:41:02');
+INSERT INTO `cpartner` VALUES ('2', 'B', '测试B', 'bbb', '3', '2018-07-17 11:41:03');
 
 -- ----------------------------
 -- Table structure for `cpartnerlist`
@@ -78,11 +80,15 @@ CREATE TABLE `cpartnerlist` (
   `cpartnerlist_type` varchar(255) DEFAULT NULL COMMENT '结伴类型，A男女并不限，B男生专区，C女生专区',
   `cpartnerlist_success` int(11) DEFAULT '0' COMMENT '结伴成功状态，1为成功，0为不成功',
   PRIMARY KEY (`cpartnerlist_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cpartnerlist
 -- ----------------------------
+INSERT INTO `cpartnerlist` VALUES ('5', '1', '3', 'A', '0');
+INSERT INTO `cpartnerlist` VALUES ('6', '1', '3', 'A', '0');
+INSERT INTO `cpartnerlist` VALUES ('7', '1', '3', 'A', '0');
+INSERT INTO `cpartnerlist` VALUES ('8', '1', '3', 'A', '0');
 
 -- ----------------------------
 -- Table structure for `cpartner_reply`
@@ -96,7 +102,7 @@ CREATE TABLE `cpartner_reply` (
   `cpartner_reply_type` varchar(255) DEFAULT NULL COMMENT 'A男女不限，B男生专区，C女生专区',
   `cpartner_id` int(11) DEFAULT NULL COMMENT '回复对应的结伴id',
   PRIMARY KEY (`cpartner_reply_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cpartner_reply
@@ -109,6 +115,9 @@ INSERT INTO `cpartner_reply` VALUES ('13', '3', '测试内容', '2018-07-12 16:2
 INSERT INTO `cpartner_reply` VALUES ('14', '3', '测试内容', '2018-07-12 16:28:06', 'A', '1');
 INSERT INTO `cpartner_reply` VALUES ('15', '3', '测试内容', '2018-07-12 16:28:06', 'A', '1');
 INSERT INTO `cpartner_reply` VALUES ('16', '3', '测试内容', '2018-07-12 16:28:06', 'A', '1');
+INSERT INTO `cpartner_reply` VALUES ('17', '3', '测试内容', '2018-07-17 11:21:22', 'A', '1');
+INSERT INTO `cpartner_reply` VALUES ('18', '3', '测试内容', '2018-07-17 11:37:59', 'A', '1');
+INSERT INTO `cpartner_reply` VALUES ('19', '3', '测试内容', '2018-07-17 13:42:24', 'A', '1');
 
 -- ----------------------------
 -- Table structure for `deeptrip`
@@ -251,7 +260,7 @@ CREATE TABLE `region` (
 -- ----------------------------
 -- Records of region
 -- ----------------------------
-INSERT INTO `region` VALUES ('1', '3', '3', 'C', 'asd', '123', 'ca8befa4ea2eaa850b84423c625b93c6.jpg', '==b07c63444e3ed758d031d7f5db65ca9c.jpg==963a0cbbf56c74e22c82b10ce86a8545.jpg==2f0620caf056dcf7ab3951c7576245d0.jpg', 'asd', null, '0');
+INSERT INTO `region` VALUES ('1', '3', '3', 'C', 'asd', '123', 'ca8befa4ea2eaa850b84423c625b93c6.jpg', '==b07c63444e3ed758d031d7f5db65ca9c.jpg==963a0cbbf56c74e22c82b10ce86a8545.jpg==2f0620caf056dcf7ab3951c7576245d0.jpg', 'asd', '5', '0');
 INSERT INTO `region` VALUES ('2', '3', '3', 'C', 'asd', '123', 'ca8befa4ea2eaa850b84423c625b93c6.jpg', '==b07c63444e3ed758d031d7f5db65ca9c.jpg==963a0cbbf56c74e22c82b10ce86a8545.jpg==2f0620caf056dcf7ab3951c7576245d0.jpg', 'asd', null, '0');
 INSERT INTO `region` VALUES ('3', '3', '3', 'C', 'asd', '123', 'ca8befa4ea2eaa850b84423c625b93c6.jpg', '==b07c63444e3ed758d031d7f5db65ca9c.jpg==963a0cbbf56c74e22c82b10ce86a8545.jpg==2f0620caf056dcf7ab3951c7576245d0.jpg', 'asd', null, '0');
 INSERT INTO `region` VALUES ('4', '3', '3', 'C', 'asd', '123', 'ca8befa4ea2eaa850b84423c625b93c6.jpg', '==b07c63444e3ed758d031d7f5db65ca9c.jpg==963a0cbbf56c74e22c82b10ce86a8545.jpg==2f0620caf056dcf7ab3951c7576245d0.jpg', 'asd', null, '0');
@@ -297,16 +306,21 @@ INSERT INTO `region` VALUES ('54', '1', '3', 'A', 'asdasd', '0', '', '==8d7ba77a
 DROP TABLE IF EXISTS `region_reply`;
 CREATE TABLE `region_reply` (
   `region_reply_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论id',
+  `region_id` int(11) DEFAULT NULL COMMENT '对应区域的id',
+  `region_reply_user_id` int(11) DEFAULT NULL,
   `region_reply_type` varchar(255) DEFAULT NULL COMMENT 'A为酒店评论，B为餐厅评论，C为景点评论',
   `region_reply_content` text COMMENT '评论内容',
-  `region_reply_time` time DEFAULT '00:00:00' COMMENT '评论时间，这里存的是具体时间，2018-7-1',
+  `region_reply_time` timestamp NULL DEFAULT '0000-00-00 00:00:00' COMMENT '评论时间，这里存的是具体时间，2018-7-1',
   `region_reply_score` int(11) DEFAULT NULL COMMENT '评论时带过来的分数',
   PRIMARY KEY (`region_reply_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of region_reply
 -- ----------------------------
+INSERT INTO `region_reply` VALUES ('1', '1', '3', 'C', '测试评论内容', '2018-07-17 00:00:00', '5');
+INSERT INTO `region_reply` VALUES ('2', '1', '3', 'C', 'ASD', '2018-07-17 00:00:00', '3');
+INSERT INTO `region_reply` VALUES ('3', '1', '4', 'C', 'asd', '0000-00-00 00:00:00', '5');
 
 -- ----------------------------
 -- Table structure for `strategy`
