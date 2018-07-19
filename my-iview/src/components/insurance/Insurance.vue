@@ -48,8 +48,8 @@
                         上传一张封面
                         <Modal title="View Image" v-model="visible">
                             <img :src="`${domain}/assets/uploads/${imgName}`" v-if="visible" style="width: 100%">
-                            
-                        </Modal>                                
+
+                        </Modal>
                     </div>
                     <br>
                     <br>
@@ -57,6 +57,8 @@
                     <br>
                     <br>
                     <Button type="success" success @click.native="subtext">发布</Button>
+
+
             </div>
         </NewMenu>
     </div>
@@ -85,7 +87,7 @@ var qs = require('qs');
 
 export default {
     components: {
-        NewMenu,  
+        NewMenu,
     },
     data () {
         return {
@@ -122,7 +124,7 @@ export default {
             visible: false,
             uploadList: [],
             upload_link: `${domain}/upload/do_upload`,
-            
+
 
         }
     },
@@ -154,7 +156,7 @@ export default {
             file.url = `${domain}/assets/uploads/${filename}`;
             file.name = filename;
         },
-        
+
         subtext(){
             const data = {
                 phone:this.phone,
@@ -163,7 +165,7 @@ export default {
                 info:this.info,
                 title:this.title,
             };
-            
+
             const arr = {
                 params: data,
             };
