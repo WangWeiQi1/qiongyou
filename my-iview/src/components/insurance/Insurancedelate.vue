@@ -17,7 +17,7 @@
                     </Select>
                     <br>
                     <br>
-                    
+
                     <Button type="success" success @click.native="search">搜索</Button>
                 </div>
                 <br>
@@ -53,7 +53,7 @@ var qs = require('qs');
 
 export default {
     components: {
-        NewMenu,  
+        NewMenu,
     },
     data () {
         return {
@@ -87,7 +87,7 @@ export default {
             visible: false,
             uploadList: [],
             upload_link: `${domain}/upload/do_upload`,
-            
+
             columns7: [
                 {
                     title: '公司名称',
@@ -151,7 +151,8 @@ export default {
                     }
                 }
             ],
-            data6: []
+            data6: [],
+            show_link:`${domain}`,
         }
 
     },
@@ -197,7 +198,7 @@ export default {
                 type:this.type,
                 title:this.title,
             };
-            
+
             const arr = {
                 params: data,
             };
@@ -233,11 +234,11 @@ export default {
 
     },
     created() {
-
+        axios.get('')
     },
     mounted () {
     },
-    
+
 
 }
 </script>
