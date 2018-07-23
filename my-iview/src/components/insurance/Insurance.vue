@@ -159,11 +159,11 @@ export default {
 
         subtext(){
             const data = {
-                phone:this.phone,
-                city:this.city,
-                price:this.price,
-                info:this.info,
-                title:this.title,
+                insurance_phone:this.phone,
+                insurance_type:this.city,
+                insurance_price:this.price,
+                insurance_content:this.info,
+                insurance_company:this.title,
             };
 
             const arr = {
@@ -173,6 +173,7 @@ export default {
                 qs.stringify(arr))
             .then(res=>{
                 console.log('success', res.data);
+                this.$router.push(`/Insurancedelate`);
             }).catch(res=>{
                 console.log('fail');
             });

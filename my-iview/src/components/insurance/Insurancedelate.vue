@@ -164,7 +164,7 @@ export default {
         remove (index) {
             console.log(index);
             const data = {
-                params:this.data6[index]
+                insurance_id:this.data6[index]
             };
             // console.log(this.data6[index]);
             axios.post(`${domain}/Insurance/delate_data`,
@@ -195,8 +195,8 @@ export default {
         search(){
             this.data6 = [];
             const data = {
-                type:this.type,
-                title:this.title,
+                insurance_type:this.type,
+                insurance_company:this.title,
             };
 
             const arr = {
@@ -234,7 +234,25 @@ export default {
 
     },
     created() {
-        axios.get('')
+        axios.post(`${domain}/Insurance/default_show`)
+        .then(res => {
+            const dicta = {
+                    A: '旅游人身意外伤害险',
+                    B: '旅游意外伤害险',
+                    C: '旅游求救险',
+                }
+                res.data.forEach(e => {
+                    this.data6.push({
+                        name: e.insurance_company,
+                        type: dicta[e.insurance_type],
+                        phone: e.insurance_phone,
+                        price: e.insurance_price,
+                        id:e.insurance_id,
+                    })
+                });
+        }).catch(res => {
+
+        })
     },
     mounted () {
     },

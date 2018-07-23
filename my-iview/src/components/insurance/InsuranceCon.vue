@@ -161,18 +161,16 @@ export default {
         
         updataText(){
             const data = {
-                phone:this.phone,
-                city:this.city,
-                price:this.price,
-                info:this.info,
-                title:this.title,
-                id :this.$route.params.u,
+                insurance_phone:this.phone,
+                insurance_type:this.city,
+                insurance_price:this.price,
+                insurance_content:this.info,
+                insurance_company:this.title,
+                insurance_id :this.$route.params.u,
             };
             
             const arr = {
                 params: data,
-             
-
             };
             axios.post(`${domain}/Insurance/updata_data`,
                 qs.stringify(arr))
@@ -181,6 +179,8 @@ export default {
                     alert('更新成功');
                 }
                 console.log('success', res.data);
+
+                this.$router.push(`/Insurancedelate`);
             }).catch(res=>{
                 console.log('fail');
             });
